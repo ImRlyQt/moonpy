@@ -1,4 +1,5 @@
 import datetime
+import math
 
 def moon_phase():
     """
@@ -45,6 +46,62 @@ def moon_phase():
         return "Sierp ubywający 🌘"
     else:
         return "Nów 🌑"
+
+def moon_phase_precise():
+    """
+    Zwraca aktualną fazę Księżyca z wysoką dokładnością.
+    Algorytm oparty na epoce J2000.
+    """
+
+    now = datetime.datetime.now(datetime.UTC)
+
+    # Julian Date
+    def julian_date(dt):
+        return (dt.timestamp() / 86400.0) + 2440587.5
+
+    jd = julian_date(now)
+
+    # Dni od epoki J2000
+    days = jd - 2451549.5
+
+    # Średnia anomalia Słońca
+    sun_mean_anom = math.radians((357.5291 + 0.98560028 * days) % 360)
+
+    # Średnia długość Księżyca
+    moon_mean_long = math.radians((218.316 + 13.176396 * days) % 360)
+
+    # Średnia anomalia Księżyca
+    moon_mean_anom = math.radians((134.963 + 13.064993 * days) % 360)
+
+    # Elongacja
+    elong = math.radians((297.850 + 12.190749 * days) % 360)
+
+    # Faza księżyca (0 = nów, 0.5 = pełnia)
+    phase = (1 - math.cos(moon_mean_anom - sun_mean_anom)) / 2
+
+    # Dobór nazwy
+    if phase < 0.03:
+        return "Nów 🌑"
+    elif phase < 0.23:
+        return "Sierp przybywający 🌒"
+    elif phase < 0.27:
+        return "Pierwsza kwadra 🌓"
+    elif phase < 0.48:
+        return "Garbaty przybywający 🌔"
+    elif phase < 0.52:
+        return "Pełnia 🌕"
+    elif phase < 0.73:
+        return "Garbaty ubywający 🌖"
+    elif phase < 0.77:
+        return "Ostatnia kwadra 🌗"
+    elif phase < 0.97:
+        return "Sierp ubywający 🌘"
+    else:
+        return "Nów 🌑"
+
+
+print(moon_phase_precise())
+
 
 # przykład użycia:
 print(moon_phase())
