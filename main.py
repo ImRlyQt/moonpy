@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from moon_phase import moon_phase
 from ascii_moon import ASCII_MOON 
 
