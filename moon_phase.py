@@ -30,11 +30,11 @@ def moon_phase():
     elif age < 9.22831:
         return "Pierwsza kwadra"
     elif age < 12.91963:
-        return "Garbaty przybywający"
+        return "Garb przybywający"
     elif age < 16.61096:
         return "Pełnia"
     elif age < 20.30228:
-        return "Garbaty ubywający"
+        return "Garb ubywający"
     elif age < 23.99361:
         return "Ostatnia kwadra"
     elif age < 27.68493:
