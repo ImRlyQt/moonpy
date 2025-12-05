@@ -1,10 +1,10 @@
 import datetime
 
-def moon_phase():
-    now = datetime.datetime.now(datetime.UTC)
+def moon_phase(now):
+#    now = datetime.datetime.now(datetime.UTC)
     year = now.year
     month = now.month
-    day = now.day
+    day = now.day - 2
 
     if month < 3:
         year -= 1
